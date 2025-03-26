@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import "./globals.css";
 import Script from 'next/script';
 import Navigation from "@/components/Navigation";
+import ConsentManager from "@/components/ConsentManager";
 
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function RootLayout({
       </head>
       <body className="bg-slate-900 text-white min-h-screen">
         <Navigation />
+        <ConsentManager />
         <main className="container mx-auto px-4 py-8 pb-24">
           {children}
         </main>

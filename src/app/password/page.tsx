@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import toast, { Toaster } from "react-hot-toast";
 import { IconRefresh, IconLock, IconShieldLock } from "@tabler/icons-react";
@@ -20,10 +20,14 @@ export default function PasswordGenerator() {
   const [password, setPassword] = useState("");
   const [passwordStrength, setPasswordStrength] = useState(0);
   const windowWidth = useWindowWidth();
+  const isFirstRender = useRef(true);
 
   useEffect(() => {
-    // Génère automatiquement un mot de passe au chargement
-    handleGeneratePassword();
+    // Génère silencieusement un mot de passe au chargement initial
+    if (isFirstRender.current) {
+      generatePasswordSilently();
+      isFirstRender.current = false;
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -34,6 +38,26 @@ export default function PasswordGenerator() {
       setPasswordStrength(strength);
     }
   }, [password]);
+
+  // Fonction pour générer un mot de passe sans notification
+  const generatePasswordSilently = () => {
+    try {
+      const options = { 
+        length, 
+        includeLowercase, 
+        includeUppercase, 
+        includeNumbers, 
+        includeSymbols 
+      };
+      
+      const newPassword = generatePassword(options);
+      setPassword(newPassword);
+      // Pas de toast ici
+    } catch (error) {
+      console.error("Erreur lors de la génération silencieuse:", error);
+      // Pas de notification d'erreur non plus
+    }
+  };
 
   const handleGeneratePassword = () => {
     try {
@@ -47,7 +71,11 @@ export default function PasswordGenerator() {
       
       const newPassword = generatePassword(options);
       setPassword(newPassword);
-      toast.success("Nouveau mot de passe généré !");
+      
+      // Afficher le toast seulement si ce n'est pas le premier rendu
+      if (!isFirstRender.current) {
+        toast.success("Nouveau mot de passe généré !");
+      }
     } catch (error) {
       if (error instanceof Error) {
         toast.error(error.message);
