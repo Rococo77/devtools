@@ -7,7 +7,9 @@ import WebToolCard from "@/components/WebToolCard";
 import Base64Tool from "@/components/tools/web/Base64Tool";
 import UrlEncoder from "@/components/tools/web/UrlEncoder";
 import JwtParser from "@/components/tools/web/JwtParser";
-import { IconBinary, IconLink, IconKey } from "@tabler/icons-react";
+import MetaTagGenerator from "@/components/tools/web/MetaTagGenerator";
+import UserAgentChecker from "@/components/tools/web/UserAgentChecker";
+import { IconBinary, IconLink, IconKey, IconBrowser, IconSeo } from "@tabler/icons-react";
 
 export default function WebTools() {
   const [activeTab, setActiveTab] = useState("base64");
@@ -33,6 +35,20 @@ export default function WebTools() {
       description: "Analyser et décoder les tokens JWT",
       icon: <IconKey size={24} />,
       color: "bg-purple-600"
+    },
+    {
+      id: "metatags",
+      title: "Générateur Open Graph",
+      description: "Créer des balises meta pour réseaux sociaux",
+      icon: <IconSeo size={24} />,
+      color: "bg-yellow-600"
+    },
+    {
+      id: "useragent",
+      title: "User-Agent Checker",
+      description: "Analyser les données du navigateur",
+      icon: <IconBrowser size={24} />,
+      color: "bg-pink-600"
     }
   ];
 
@@ -76,6 +92,14 @@ export default function WebTools() {
 
           <TabsContent value="jwt">
             <JwtParser />
+          </TabsContent>
+          
+          <TabsContent value="metatags">
+            <MetaTagGenerator />
+          </TabsContent>
+          
+          <TabsContent value="useragent">
+            <UserAgentChecker />
           </TabsContent>
         </Tabs>
       </motion.div>
