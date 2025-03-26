@@ -21,9 +21,10 @@ export default function RootLayout({
           id="adsbygoogle-init"
           strategy="afterInteractive"
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5880015622493733"
           crossOrigin="anonymous"
         />
+        <meta name="google-adsense-account" content="ca-pub-5880015622493733"></meta>
       </head>
       <body className="bg-slate-900 text-white min-h-screen">
         <Navigation />

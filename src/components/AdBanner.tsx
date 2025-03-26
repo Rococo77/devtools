@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useWindowWidth } from '@react-hook/window-size';
 
+// Declare the adsbygoogle property on the Window interface
+declare global {
+  interface Window {
+    adsbygoogle: any[];
+  }
+}
+
 interface AdBannerProps {
   adSlot: string;
   format?: 'auto' | 'rectangle' | 'horizontal' | 'vertical';
@@ -20,7 +27,7 @@ export default function AdBanner({
   
   useEffect(() => {
     // Remplacez par votre client ID Google AdSense
-    setClientId('ca-pub-XXXXXXXXXXXXXXXX');
+    setClientId('ca-pub-5880015622493733');
     
     // Charge le script AdSense si ce n'est pas déjà fait
     const hasAdScript = document.querySelector('script[src*="adsbygoogle.js"]');
@@ -35,12 +42,12 @@ export default function AdBanner({
     }
     
     // Force la tentative de chargement des annonces
-    //try {
-      //(window.adsbygoogle = window.adsbygoogle || []).push({});
-      //setAdLoaded(true);
-    //} catch (error) {
-      //console.error('Error loading AdSense ads:', error);
-    //}
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      setAdLoaded(true);
+    } catch (error) {
+      console.error('Error loading AdSense ads:', error);
+    }
   }, [clientId]);
   
   // Définir les dimensions en fonction du format
