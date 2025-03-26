@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { IconBrowser, IconDevices, IconCopy, IconInfoCircle } from "@tabler/icons-react";
 import toast, { Toaster } from "react-hot-toast";
-import * as UAParserModule from "ua-parser-js";
+// Import correct de UAParser
+import { UAParser } from "ua-parser-js";
 
-const UAParser = UAParserModule.default || UAParserModule;
 interface UADetails {
   browser: {
     name?: string;
@@ -45,7 +45,8 @@ export default function UserAgentChecker() {
 
   const parseUserAgent = (ua: string) => {
     try {
-      const parser = new (UAParser as any)(ua);
+      // Utilisation correcte de UAParser
+      const parser = new UAParser(ua);
       setDetails({
         browser: parser.getBrowser(),
         engine: parser.getEngine(),
@@ -112,7 +113,7 @@ export default function UserAgentChecker() {
     };
     
     for (const key in osIcons) {
-      if (name.includes(key)) {
+      if (name && name.includes(key)) {
         return osIcons[key];
       }
     }
