@@ -21,7 +21,7 @@
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.294.0",
     "nanoid": "^5.0.4",
-    "next": "^14.2.26",
+    "next": "14.2.35",
     "qrcode.react": "^3.2.0",
     "react": "^18.2.0",
     "react-adsense": "^0.1.0",
